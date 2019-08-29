@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SomeBean {
 
-    @Value("${a}")
+    @Value("${a:default}")
     private String a;
 
     public String getA() {
