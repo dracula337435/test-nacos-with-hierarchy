@@ -8,11 +8,19 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class BootStrap {
 
     public static void main(String[] args){
-        AnnotationConfigApplicationContext cac = new AnnotationConfigApplicationContext();
-        cac.register(Config.class);
-        cac.refresh();
-        SomeBean someBean = cac.getBean(SomeBean.class);
-        System.out.println(someBean.getA());
+        //
+        AnnotationConfigApplicationContext aac = new AnnotationConfigApplicationContext();
+        aac.register(Config.class, SomeBean.class);
+        aac.refresh();
+        SomeBean someBean = aac.getBean(SomeBean.class);
+        System.out.println("parent: "+someBean.getA());
+        //
+        AnnotationConfigApplicationContext aacChild = new AnnotationConfigApplicationContext();
+        aacChild.setParent(aac);
+        aacChild.register(SomeBean.class);
+        aacChild.refresh();
+        SomeBean someBeanInChild = aacChild.getBean(SomeBean.class);
+        System.out.println("child: "+someBeanInChild.getA());
     }
 
 }
