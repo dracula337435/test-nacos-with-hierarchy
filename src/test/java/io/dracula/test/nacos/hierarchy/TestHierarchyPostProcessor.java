@@ -62,6 +62,9 @@ public class TestHierarchyPostProcessor {
         aacChild.refresh();
         SomeBean someBeanInChild = aacChild.getBean(SomeBean.class);
         System.out.println("child: "+someBeanInChild.getA());
+        //
+        System.out.println("child中可以得到parent-ApplicationContext中的BeanPostProcessor: "+aacChild.getBean(MyBeanPostProcessor.class));
+        System.out.println("child中可以得到parent-ApplicationContext中的BeanFactoryPostProcessor: "+aacChild.getBean(MyBeanFactoryPostProcessor.class));
     }
 
 }
